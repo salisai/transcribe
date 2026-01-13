@@ -25,13 +25,12 @@ export default function Navbar() {
 
     return (
         <nav
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
-                scrolled 
-                    ? "h-16 py-0 rounded-2xl mx-4 mt-3 left-4 right-4 border border-gray-200 bg-white/80 backdrop-blur-md shadow-sm" 
-                    : "h-20 py-4 bg-transparent"
-            }`}
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${scrolled
+                ? "h-16 border-b border-[#E2E8F0] bg-white/90 backdrop-blur-md"
+                : "h-20 bg-transparent"
+                }`}
         >
-            <div className="max-w-7xl mx-auto h-full px-8 flex items-center justify-between">
+            <div className="max-w-6xl mx-auto h-full px-6 flex items-center justify-between">
                 <Logo />
 
                 <div className="hidden md:flex items-center gap-8">
@@ -39,22 +38,21 @@ export default function Navbar() {
                         <Link
                             key={link.name}
                             href={link.href}
-                            className="text-sm font-heading font-medium text-charcoal hover:text-black transition-colors relative group"
+                            className="text-sm font-medium text-[#4B5563] hover:text-[#111827] transition-colors"
                         >
                             {link.name}
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-black transition-all group-hover:w-full" />
                         </Link>
                     ))}
                 </div>
 
                 <div className="flex items-center gap-4">
                     <Link href="/login">
-                        <Button variant="ghost" className="text-sm font-heading font-medium text-charcoal hover:text-black">
+                        <Button variant="ghost" className="text-sm font-medium text-[#4B5563] hover:bg-transparent hover:text-[#4B5563]">
                             Log In
                         </Button>
                     </Link>
                     <Link href="/signup">
-                        <Button className="btn-3d px-6 h-10 text-sm font-heading font-medium rounded-xl">
+                        <Button className="btn-premium px-5 h-9 text-sm">
                             Start Free
                         </Button>
                     </Link>

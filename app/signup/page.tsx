@@ -4,106 +4,91 @@ import Link from "next/link";
 import Logo from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { motion } from "framer-motion";
-import { Mail, Lock, User, Chrome, Github, Eye, EyeOff } from "lucide-react";
+import { Chrome, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 export default function SignupPage() {
     const [showPassword, setShowPassword] = useState(false);
 
     return (
-        <main className="min-h-screen relative flex items-center justify-center p-6 bg-[#FDFCFB]">
-            {/* Background Pattern */}
-            <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none" />
+        <main className="min-h-screen flex flex-col bg-white">
+            <div className="w-full max-w-6xl mx-auto px-6 h-20 flex items-center">
+                <Logo />
+            </div>
 
-            <motion.div
-                initial={{ opacity: 0.5, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-                className="w-full max-w-md relative z-10"
-            >
-                <div className="bg-white rounded-3xl border border-[#E5E5E5] p-10 shadow-2xl space-y-8">
-                    <div className="flex flex-col items-center gap-4">
-                        <Logo />
-                        <div className="text-center">
-                            <h1 className="text-3xl font-heading font-bold text-[#0A0A0A]">Create your account</h1>
-                            <p className="text-[#525252] mt-2">Start converting lectures today</p>
-                        </div>
+            <div className="flex-1 flex items-center justify-center p-6">
+                <div className="w-full max-w-[400px]">
+
+                    <div className="mb-8 text-center">
+                        <h1 className="text-3xl font-semibold text-[#2F7F6F] tracking-tight mb-2">Create an account</h1>
+                        {/* Kept content as requested, but design implies no subtext or minimal subtext. Keeping it minimal. */}
                     </div>
 
-                    <div className="grid grid-cols-1 gap-3">
-                        <Button variant="outline" className="h-12 border-[#E5E5E5] bg-white text-[#0A0A0A] font-heading font-medium hover:bg-gray-50 flex items-center justify-center gap-3">
-                            <Chrome className="w-5 h-5" />
-                            Continue with Google
-                        </Button>
-                        <Button variant="outline" className="h-12 border-[#E5E5E5] bg-white text-[#0A0A0A] font-heading font-medium hover:bg-gray-50 flex items-center justify-center gap-3">
-                            <Github className="w-5 h-5" />
-                            Continue with GitHub
-                        </Button>
-                    </div>
+                    <form className="space-y-5">
 
-                    <div className="relative flex items-center justify-center">
-                        <div className="absolute inset-0 flex items-center">
-                            <div className="w-full border-t border-[#E5E5E5]"></div>
+                        <div className="space-y-1.5">
+                            <label className="text-[15px] font-medium text-[#374151]">Email</label>
+                            <Input
+                                type="email"
+                                placeholder="Enter your email"
+                                className="h-12 bg-[#F9FAFB] border-0 focus-visible:ring-1 focus-visible:ring-offset-0 focus-visible:ring-[#E5E7EB] placeholder:text-gray-400 rounded-xl"
+                            />
                         </div>
-                        <span className="relative bg-white px-4 text-xs font-heading font-medium text-[#A3A3A3] uppercase tracking-widest">or</span>
-                    </div>
-
-                    <form className="space-y-6">
-                        <div className="space-y-2">
-                            <label className="text-sm font-heading font-medium text-[#525252] ml-1">Full Name</label>
+                        <div className="space-y-1.5">
+                            <label className="text-[15px] font-medium text-[#374151]">Password</label>
                             <div className="relative">
-                                <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A3A3A3]" />
-                                <Input
-                                    type="text"
-                                    placeholder="John Doe"
-                                    className="h-12 pl-11 rounded-lg border-[#E5E5E5] focus:border-[#0A0A0A] focus:ring-1 focus:ring-[#0A0A0A] transition-all"
-                                />
-                            </div>
-                        </div>
-
-                        <div className="space-y-2">
-                            <label className="text-sm font-heading font-medium text-[#525252] ml-1">Email address</label>
-                            <div className="relative">
-                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A3A3A3]" />
-                                <Input
-                                    type="email"
-                                    placeholder="name@example.com"
-                                    className="h-12 pl-11 rounded-lg border-[#E5E5E5] focus:border-[#0A0A0A] focus:ring-1 focus:ring-[#0A0A0A] transition-all"
-                                />
-                            </div>
-                        </div>
-
-                        <div className="space-y-2">
-                            <label className="text-sm font-heading font-medium text-[#525252] ml-1">Password</label>
-                            <div className="relative">
-                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A3A3A3]" />
                                 <Input
                                     type={showPassword ? "text" : "password"}
-                                    placeholder="••••••••"
-                                    className="h-12 pl-11 pr-11 rounded-lg border-[#E5E5E5] focus:border-[#0A0A0A] focus:ring-1 focus:ring-[#0A0A0A] transition-all"
+                                    placeholder="Enter your password"
+                                    className="h-12 bg-[#F9FAFB] border-0 focus-visible:ring-1 focus-visible:ring-offset-0 focus-visible:ring-[#E5E7EB] placeholder:text-gray-400 rounded-xl pr-10"
                                 />
                                 <button
                                     type="button"
                                     onClick={() => setShowPassword(!showPassword)}
-                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-[#A3A3A3] hover:text-[#525252]"
+                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
                                 >
-                                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                                 </button>
                             </div>
                         </div>
 
-                        <Button className="w-full btn-3d h-12 text-base font-heading font-medium shadow-lg">
-                            Create account
+                        <div className="flex items-center space-x-2 pt-1">
+                            <input
+                                type="checkbox"
+                                id="terms"
+                                className="w-4 h-4 rounded border-gray-300 text-[#0F3D3E] focus:ring-[#0F3D3E]"
+                            />
+                            <label htmlFor="terms" className="text-sm text-[#6B7280]">
+                                I agree to all the <Link href="#" className="font-medium text-[#111827] underline decoration-gray-300 underline-offset-2">Terms & Conditions</Link>
+                            </label>
+                        </div>
+
+                        <Button className="w-full h-12 btn-premium rounded-xl text-[15px] font-semibold tracking-wide transition-all shadow-none">
+                            Sign up
                         </Button>
                     </form>
 
-                    <p className="text-center text-sm text-[#737373]">
+                    <div className="relative flex items-center justify-center py-8">
+                        <div className="absolute inset-0 flex items-center">
+                            <div className="w-full border-t border-[#F3F4F6]"></div>
+                        </div>
+                        <span className="relative bg-white px-3 text-sm text-[#9CA3AF]">Or</span>
+                    </div>
+
+                    <div className="space-y-4">
+                        <Button variant="outline" className="w-full h-12 border border-[#E5E7EB] bg-white text-[#374151] font-medium hover:bg-white hover:text-[#374151] rounded-xl flex items-center justify-center gap-3 transition-all shadow-none">
+                            <Chrome className="w-5 h-5" />
+                            <span className="text-[15px]">Google</span>
+                        </Button>
+                    </div>
+
+                    <p className="text-center text-[15px] text-[#6B7280] mt-8">
                         Already have an account?{" "}
-                        <Link href="/login" className="text-[#0A0A0A] font-medium hover:underline">Log in</Link>
+                        <Link href="/login" className="text-[#111827] font-semibold hover:underline decoration-2 underline-offset-2">Log in</Link>
                     </p>
                 </div>
-            </motion.div>
+            </div>
         </main>
     );
 }

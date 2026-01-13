@@ -36,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${dmSans.variable} ${inter.variable} ${sourceSerif.variable} ${jetBrainsMono.variable} antialiased`}
+        className={`${inter.variable} ${dmSans.variable} ${sourceSerif.variable} ${jetBrainsMono.variable} antialiased bg-background text-foreground font-sans`}
       >
         {children}
       </body>

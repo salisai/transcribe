@@ -9,12 +9,11 @@ export default function Pricing() {
         {
             name: "Starter",
             price: "0",
-            description: "Perfect for trying out",
+            description: "For casual learners",
             features: [
                 "1 video per month",
                 "Up to 30 minutes",
-                "Basic article format",
-                "Text export",
+                "Basic summary",
             ],
             buttonText: "Start Free",
             buttonVariant: "outline" as const,
@@ -23,13 +22,12 @@ export default function Pricing() {
         {
             name: "Basic",
             price: "9",
-            description: "Best for casual learners",
+            description: "For students & researchers",
             features: [
                 "5 videos per month",
                 "Up to 1 hour each",
-                "Enhanced formatting",
+                "Markdown export",
                 "Priority processing",
-                "Export to Markdown/PDF",
             ],
             buttonText: "Get Started",
             buttonVariant: "default" as const,
@@ -39,13 +37,12 @@ export default function Pricing() {
         {
             name: "Pro",
             price: "29",
-            description: "For serious researchers",
+            description: "Power users",
             features: [
-                "20 videos per month",
-                "Up to 2 hours each",
-                "Advanced formatting",
+                "Unlimited videos",
+                "Up to 4 hours each",
+                "Deep analysis",
                 "API access",
-                "Custom templates",
                 "Priority support",
             ],
             buttonText: "Upgrade to Pro",
@@ -56,69 +53,54 @@ export default function Pricing() {
     ];
 
     return (
-        <section id="pricing" className="py-32 bg-[#FDFCFB]">
-            <div className="max-w-7xl mx-auto px-8">
-                <div className="text-center mb-20">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-4xl md:text-5xl font-heading font-bold text-[#0A0A0A] mb-4"
-                    >
-                        Simple, Transparent Pricing
-                    </motion.h2>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
-                        className="text-xl text-[#525252]"
-                    >
-                        Start free. Upgrade when you need more.
-                    </motion.p>
+        <section id="pricing" className="py-24 bg-[#FAFAF9]">
+            <div className="max-w-6xl mx-auto px-6">
+                <div className="text-center mb-16">
+                    <h2 className="text-3xl font-bold text-[#1F2937] mb-4">
+                        Simple Pricing
+                    </h2>
+                    <p className="text-[#6B7280]">
+                        Invest in your learning. Cancel anytime.
+                    </p>
                 </div>
 
-                <div className="flex flex-col lg:flex-row items-stretch justify-center gap-6 max-w-5xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                     {tiers.map((tier, index) => (
                         <motion.div
                             key={tier.name}
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
-                            whileHover={{ y: -5 }}
-                            className={`flex-1 flex flex-col p-10 rounded-2xl border transition-all duration-300 relative ${tier.dark
-                                    ? "bg-[#0A0A0A] text-white border-transparent shadow-2xl"
-                                    : tier.highlighted
-                                        ? "bg-white border-[#0A0A0A] shadow-xl"
-                                        : "bg-white border-[#E5E5E5] hover:border-[#A3A3A3]"
+                            className={`flex flex-col p-8 rounded-xl border transition-all ${tier.highlighted
+                                    ? "bg-white border-[#1F2937] shadow-lg relative"
+                                    : "bg-white border-[#E2E8F0]"
                                 }`}
                         >
                             {tier.badge && (
-                                <span className="absolute top-4 right-4 px-3 py-1 rounded-full bg-[#F5F5F5] text-[#0A0A0A] text-[10px] font-bold uppercase tracking-widest border border-[#E5E5E5]">
+                                <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-[#1F2937] text-white text-[10px] font-bold uppercase tracking-widest shadow-sm">
                                     {tier.badge}
                                 </span>
                             )}
+
                             <div className="mb-8">
-                                <h3 className={`text-xl font-heading font-semibold mb-2 ${tier.dark ? "text-gray-400" : "text-gray-500"}`}>
+                                <h3 className="text-lg font-semibold text-[#1F2937] mb-2">
                                     {tier.name}
                                 </h3>
                                 <div className="flex items-baseline gap-1">
-                                    <span className="text-5xl font-heading font-bold">${tier.price}</span>
-                                    <span className={`text-sm ${tier.dark ? "text-gray-400" : "text-gray-500"}`}>/month</span>
+                                    <span className="text-4xl font-bold text-[#1F2937]">${tier.price}</span>
+                                    <span className="text-sm text-[#6B7280]">/mo</span>
                                 </div>
-                                <p className={`mt-4 text-sm ${tier.dark ? "text-gray-400" : "text-gray-500"}`}>
+                                <p className="mt-3 text-sm text-[#6B7280]">
                                     {tier.description}
                                 </p>
                             </div>
 
-                            <div className="flex-1 space-y-4 mb-10">
+                            <div className="flex-1 space-y-3 mb-8">
                                 {tier.features.map((feature) => (
                                     <div key={feature} className="flex items-start gap-3">
-                                        <div className={`mt-1 p-0.5 rounded-full ${tier.dark ? "bg-white/10 text-white" : "bg-[#F5F5F5] text-[#0A0A0A]"}`}>
-                                            <Check className="w-3.5 h-3.5" />
-                                        </div>
-                                        <span className={`text-sm ${tier.dark ? "text-gray-300" : "text-[#525252]"}`}>
+                                        <Check className="w-4 h-4 text-[#2F7F6F] mt-0.5" />
+                                        <span className="text-sm text-[#4B5563]">
                                             {feature}
                                         </span>
                                     </div>
@@ -126,13 +108,9 @@ export default function Pricing() {
                             </div>
 
                             <Button
-                                size="lg"
-                                variant={tier.buttonVariant}
-                                className={`w-full h-12 rounded-lg font-heading font-semibold transition-all ${tier.dark
-                                        ? "bg-white text-[#0A0A0A] hover:bg-gray-100"
-                                        : tier.highlighted
-                                            ? "btn-3d"
-                                            : "border-[#E5E5E5] hover:border-[#0A0A0A] hover:bg-transparent"
+                                className={`w-full h-10 rounded-lg font-medium transition-all ${tier.highlighted
+                                        ? "bg-[#1F2937] hover:bg-[#111827] text-white shadow-sm"
+                                        : "bg-white border border-[#E2E8F0] text-[#1F2937] hover:bg-[#F9FAFB]"
                                     }`}
                             >
                                 {tier.buttonText}
