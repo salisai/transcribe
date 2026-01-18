@@ -7,9 +7,35 @@ import { Input } from "@/components/ui/input";
 import { Chrome, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { supabase } from "@/lib/supabase/client";
 
 export default function SignupPage() {
     const [showPassword, setShowPassword] = useState(false);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const signUpWithEmail = async(email: string, password: string) => {
+        const {error} = await supabase.auth.signUp({
+            email, 
+            password
+        });
+    }
+
+    const signInWithGoogle = async() => {
+        await supabase.auth.signInWithOAuth({
+            provider: 'google',
+            options: {
+                redirectTo: `${location.origin}/auth/callback`
+            }
+        })
+    }
+
+    const handleSignUp = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        await signUpWithEmail(email, password);
+
+    }
 
     return (
         <main className="min-h-screen flex flex-col bg-white">
@@ -32,6 +58,7 @@ export default function SignupPage() {
                             <Input
                                 type="email"
                                 placeholder="Enter your email"
+                                onChange={(e) => setEmail(e.target.value)}
                                 className="h-12 bg-[#F9FAFB] border-0 focus-visible:ring-1 focus-visible:ring-offset-0 focus-visible:ring-[#E5E7EB] placeholder:text-gray-400 rounded-xl"
                             />
                         </div>
@@ -41,6 +68,7 @@ export default function SignupPage() {
                                 <Input
                                     type={showPassword ? "text" : "password"}
                                     placeholder="Enter your password"
+                                    onChange={(e) => setPassword(e.target.value)}
                                     className="h-12 bg-[#F9FAFB] border-0 focus-visible:ring-1 focus-visible:ring-offset-0 focus-visible:ring-[#E5E7EB] placeholder:text-gray-400 rounded-xl pr-10"
                                 />
                                 <button
@@ -53,7 +81,7 @@ export default function SignupPage() {
                             </div>
                         </div>
 
-                        <div className="flex items-center space-x-2 pt-1">
+                        {/* <div className="flex items-center space-x-2 pt-1">
                             <input
                                 type="checkbox"
                                 id="terms"
@@ -62,9 +90,9 @@ export default function SignupPage() {
                             <label htmlFor="terms" className="text-sm text-[#6B7280]">
                                 I agree to all the <Link href="#" className="font-medium text-[#111827] underline decoration-gray-300 underline-offset-2">Terms & Conditions</Link>
                             </label>
-                        </div>
+                        </div> */}
 
-                        <Button className="w-full h-12 btn-premium rounded-xl text-[15px] font-semibold tracking-wide transition-all shadow-none">
+                        <Button onSubmit={handleSignUp} className="w-full h-12 btn-premium rounded-xl text-[15px] font-semibold tracking-wide transition-all shadow-none">
                             Sign up
                         </Button>
                     </form>
@@ -77,7 +105,7 @@ export default function SignupPage() {
                     </div>
 
                     <div className="space-y-4">
-                        <Button variant="outline" className="w-full h-12 border border-[#E5E7EB] bg-white text-[#374151] font-medium hover:bg-white hover:text-[#374151] rounded-xl flex items-center justify-center gap-3 transition-all shadow-none">
+                        <Button onClick={signInWithGoogle} variant="outline" className="w-full h-12 border border-[#E5E7EB] bg-white text-[#374151] font-medium hover:bg-white hover:text-[#374151] rounded-xl flex items-center justify-center gap-3 transition-all shadow-none">
                             <Chrome className="w-5 h-5" />
                             <span className="text-[15px]">Google</span>
                         </Button>

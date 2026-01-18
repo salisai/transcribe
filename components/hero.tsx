@@ -6,7 +6,7 @@ import { Play, ArrowRight, FileText, Sparkles } from "lucide-react";
 
 export default function Hero() {
     return (
-        <section className="relative pt-24 pb-20 md:pt-32 md:pb-32 overflow-hidden">
+        <section className="relative pt-30 pb-20 md:pt-46 md:pb-32 overflow-hidden">
             {/* Soft ambient background */}
             <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgba(255,255,255,0),rgba(241,245,249,0.5))]" />
 
@@ -16,7 +16,7 @@ export default function Hero() {
                 transition={{ duration: 0.8, ease: "easeOut" }}
                 className="max-w-5xl mx-auto px-6 md:px-8 text-center"
             >
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F1F5F9] border border-[#E2E8F0] mb-8">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F1F5F9] border border-[#E2E8F0] mb-4">
                     <span className="flex h-2 w-2 rounded-full bg-[#2F7F6F]"></span>
                     <span className="text-sm font-medium text-[#4B5563]">AI-Powered Learning Assistant</span>
                 </div>

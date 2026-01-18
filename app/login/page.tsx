@@ -6,9 +6,35 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Chrome, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
+import { supabase } from "@/lib/supabase/client";
 
 export default function LoginPage() {
     const [showPassword, setShowPassword] = useState(false);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const signInWithEmail = async (email: string, password: string) => {
+        return await supabase.auth.signInWithPassword({
+            email, 
+            password
+        })
+    }
+
+    const signInWithGoogle = async() => {
+        await supabase.auth.signInWithOAuth({
+            provider: 'google',
+            options: {
+                redirectTo: `${location.origin}/auth/callback`
+            }
+        })
+    }
+
+    const handleSignIn = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        await signInWithEmail(email, password);
+
+    }
 
     return (
         <main className="min-h-screen flex flex-col bg-white">
@@ -30,6 +56,7 @@ export default function LoginPage() {
                             <Input
                                 type="email"
                                 placeholder="Enter your email"
+                                onChange={(e) => setEmail(e.target.value)}
                                 className="h-12 bg-[#F9FAFB] border-0 focus-visible:ring-1 focus-visible:ring-offset-0 focus-visible:ring-[#E5E7EB] placeholder:text-gray-400 rounded-xl"
                             />
                         </div>
@@ -39,6 +66,8 @@ export default function LoginPage() {
                                 <Input
                                     type={showPassword ? "text" : "password"}
                                     placeholder="Enter your password"
+                                    onChange={(e) => setPassword(e.target.value)}
+
                                     className="h-12 bg-[#F9FAFB] border-0 focus-visible:ring-1 focus-visible:ring-offset-0 focus-visible:ring-[#E5E7EB] placeholder:text-gray-400 rounded-xl pr-10"
                                 />
                                 <button
@@ -56,7 +85,7 @@ export default function LoginPage() {
                             </div>
                         </div>
 
-                        <Button className="w-full h-12 btn-premium rounded-xl text-[15px] font-semibold tracking-wide transition-all shadow-none">
+                        <Button onSubmit={handleSignIn} className="w-full h-12 btn-premium rounded-xl text-[15px] font-semibold tracking-wide transition-all shadow-none">
                             Sign in
                         </Button>
                     </form>
